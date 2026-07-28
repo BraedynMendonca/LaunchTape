@@ -1,0 +1,51 @@
+{
+  "name": "launchtape",
+  "version": "0.1.0",
+  "description": "Turn Playwright flows into repeatable, launch-ready product demo assets.",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "playwright",
+    "product-demo",
+    "screen-recording",
+    "video",
+    "developer-tools"
+  ],
+  "bin": {
+    "launchtape": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./playwright": {
+      "types": "./dist/fixture.d.ts",
+      "import": "./dist/fixture.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node scripts/clean.mjs && tsc -p tsconfig.json",
+    "prepare": "npm run build",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "demo": "npm run build && node dist/cli.js record examples/todo-demo.spec.ts --format wide --export webm --out launch-assets"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "peerDependencies": {
+    "@playwright/test": ">=1.59.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.0",
+    "@types/node": "^24.0.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0"
+  }
+}
